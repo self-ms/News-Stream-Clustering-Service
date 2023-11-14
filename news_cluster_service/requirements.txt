@@ -1,0 +1,8 @@
+joblib
+numpy
+torch==1.11.0+cu113
+sentence-transformers
+sumy
+kafka-python
+pandas
+pymongo

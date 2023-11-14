@@ -1,0 +1,27 @@
+version: "3.5"
+
+services:
+
+  news_cluster:
+    build:
+      context: news_cluster_service
+    networks:
+      - news_cluster_microservices
+    volumes:
+      - ./news_cluster_service/:/app/
+      - /etc/timezone:/etc/timezone:ro 
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - ./news_cluster_service/news_cluster_service.env
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['2']
+            capabilities: [gpu]
+
+networks:
+
+  news_cluster_microservices:
+    driver: bridge
